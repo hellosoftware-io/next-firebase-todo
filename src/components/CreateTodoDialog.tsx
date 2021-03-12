@@ -33,7 +33,7 @@ export default function CreateTodoDialog({
           title: "",
           description: "",
         }}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting, resetForm }) => {
           const todo: Todo = {
             id: "",
             title: values.title,
@@ -44,19 +44,22 @@ export default function CreateTodoDialog({
             .then(() => {
               setSubmitting(false);
               handleClose();
+              resetForm();
             })
             .catch(() => {
               setSubmitting(false);
               handleClose();
+              resetForm();
             });
         }}
       >
-        {({ submitForm, isSubmitting, values, handleChange }) => (
+        {({ submitForm, isSubmitting, values, handleChange, resetForm }) => (
           <Form>
             <Dialog
               open={isOpen}
               onClose={() => {
                 handleClose();
+                resetForm();
               }}
             >
               <DialogTitle id="form-dialog-title">
@@ -95,6 +98,7 @@ export default function CreateTodoDialog({
                   color="primary"
                   onClick={() => {
                     handleClose();
+                    resetForm();
                   }}
                   disabled={isSubmitting}
                 >
