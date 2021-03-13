@@ -1,6 +1,6 @@
 # next-firebase-todo
 
-Example web app using Next.js, React.js, Firebase, and Material-UI.
+Example web app using Next.js, React.js, Firebase, and Material-UI. [Demo](https://next-firebase-todo.hellosoftware.io).
 
 ## Major technologies
 
