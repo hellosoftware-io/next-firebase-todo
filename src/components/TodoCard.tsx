@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
-  Typography,
   Card,
   Grid,
-  MenuItem,
+  IconButton,
   ListItemIcon,
   ListItemText,
-  IconButton,
   Menu,
+  MenuItem,
+  Typography,
 } from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Todo from "models/Todo";
-import { formatDistance } from "date-fns";
-import { deleteTodo } from "network/dataManager";
 import { useUser } from "context/userContext";
+import { formatDistance } from "date-fns";
+import Todo from "models/Todo";
+import { deleteTodo } from "network/dataManager";
+import React, { useState } from "react";
 import EditTodoDialog from "./EditTodoDialog";
 
 type Props = {
@@ -56,6 +56,7 @@ export default function TodoCard({ todo }: Props): JSX.Element {
           </Grid>
           <Grid item justifySelf="felx-end">
             <IconButton
+              id="more-button"
               aria-label="more"
               aria-controls="long-menu"
               aria-haspopup="true"
@@ -65,18 +66,11 @@ export default function TodoCard({ todo }: Props): JSX.Element {
               <MoreVertIcon />
             </IconButton>
             <Menu
-              id="demo-positioned-menu"
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
               onClose={handleClose}
-              getContentAnchorEl={null}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
+              MenuListProps={{
+                "aria-labelledby": "more-button",
               }}
             >
               <MenuItem onClick={editClicked}>
