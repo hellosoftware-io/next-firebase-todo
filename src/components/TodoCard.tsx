@@ -8,10 +8,10 @@ import {
   ListItemText,
   IconButton,
   Menu,
-} from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
+} from "@mui/material";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Todo from "models/Todo";
 import { formatDistance } from "date-fns";
 import { deleteTodo } from "network/dataManager";

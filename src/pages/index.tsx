@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { CircularProgress, Fab } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
+import { CircularProgress, Fab } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 import Todo from "models/Todo";
 import Page from "components/layout/Page";
 import TodoList from "components/TodoList";

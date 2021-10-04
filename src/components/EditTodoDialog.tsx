@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogContent,
   LinearProgress,
-} from "@material-ui/core";
+} from "@mui/material";
 import { Formik, Form } from "formik";
 import { callEditTodo } from "network/dataManager";
 import Todo from "models/Todo";

@@ -7,7 +7,7 @@ import {
   Container,
   Link,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import SignInWithEmail from "./SignInWithEmail";
 
 export default function SignIn(): JSX.Element {

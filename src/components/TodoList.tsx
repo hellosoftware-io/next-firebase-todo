@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@mui/material";
 import Todo from "models/Todo";
 import TodoCard from "./TodoCard";
 

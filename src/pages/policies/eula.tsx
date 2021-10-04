@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import Page from "components/layout/Page";
 
 export default function EulaPage(): JSX.Element {

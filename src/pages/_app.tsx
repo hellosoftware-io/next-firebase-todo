@@ -1,28 +1,25 @@
-import * as React from "react";
-import { AppProps } from "next/app";
-import { ThemeProvider } from "@material-ui/core/styles";
-import { CacheProvider } from "@emotion/react";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import createCache from "@emotion/cache";
-import theme from "theme";
+import { CacheProvider, EmotionCache } from '@emotion/react';
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
 import Layout from "components/layout/Layout";
 import UserProvider from "context/userContext";
+import createEmotionCache from "lib/createEmotionCache";
+import { AppProps } from "next/app";
+import * as React from "react";
+import theme from "theme";
 
-export const cache = createCache({ key: "css", prepend: true });
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
 
-export default function MyApp(props: AppProps): JSX.Element {
-  const { Component, pageProps } = props;
+interface MyAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
 
-  React.useEffect(() => {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector("#jss-server-side");
-    if (jssStyles) {
-      jssStyles.parentElement?.removeChild(jssStyles);
-    }
-  }, []);
+export default function MyApp(props: MyAppProps): JSX.Element {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   return (
-    <CacheProvider value={cache}>
+    <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <UserProvider>

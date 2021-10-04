@@ -1,8 +1,8 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@mui/material/styles";
 
 // Create a theme instance.
-// https://next.material-ui.com/customization/theming/
-const theme = createMuiTheme({
+// https://mui.com/customization/theming/
+const theme = createTheme({
   palette: {
     primary: {
       main: "#673AB7",
@@ -10,6 +10,9 @@ const theme = createMuiTheme({
     secondary: {
       main: "#9575CD",
     },
+    background: {
+      default: "#f7f7f7"
+    }
   },
   typography: {
     fontSize: 17,
