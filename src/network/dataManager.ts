@@ -1,7 +1,21 @@
-import React from "react";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  DocumentData,
+  DocumentReference,
+  getFirestore,
+  limit,
+  onSnapshot,
+  orderBy,
+  query,
+  setDoc,
+} from "firebase/firestore";
 import Todo from "models/Todo";
-import firebase from "network/firebase";
-const db = firebase.firestore();
+import { firebaseApp } from "network/firebase";
+import React from "react";
+const db = getFirestore(firebaseApp);
 
 export function getTodos(
   uid: string,
@@ -9,12 +23,13 @@ export function getTodos(
 ) {
   console.log("Getting todos for user: " + uid);
 
-  const query = db
-    .collection("users/" + uid + "/todos")
-    .orderBy("createdDate")
-    .limit(50);
+  const docsQuery = query(
+    collection(db, "users/" + uid + "/todos"),
+    orderBy("createdDate"),
+    limit(50)
+  );
 
-  query.onSnapshot((querySnapshot) => {
+  onSnapshot(docsQuery, (querySnapshot) => {
     const todos: Todo[] = [];
 
     querySnapshot.forEach((doc) => {
@@ -42,23 +57,17 @@ export function getTodos(
   // });
 }
 
-export function callCreateTodo(uid: string, todo: Todo): Promise<void> {
-  return db
-    .collection("users/" + uid + "/todos")
-    .doc()
-    .set(todo);
+export function callCreateTodo(
+  uid: string,
+  todo: Todo
+): Promise<DocumentReference<DocumentData>> {
+  return addDoc(collection(db, "users/" + uid + "/todos"), todo);
 }
 
 export function callEditTodo(uid: string, todo: Todo): Promise<void> {
-  return db
-    .collection("users/" + uid + "/todos")
-    .doc(todo.id)
-    .set(todo);
+  return setDoc(doc(db, "users/" + uid + "/todos", todo.id), todo);
 }
 
 export function deleteTodo(uid: string, todoID: string): Promise<void> {
-  return db
-    .collection("users/" + uid + "/todos")
-    .doc(todoID)
-    .delete();
+  return deleteDoc(doc(db, "users/" + uid + "/todos", todoID));
 }

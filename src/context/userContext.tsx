@@ -1,9 +1,9 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
-import firebase from "network/firebase";
 import SignIn from "components/SignIn";
+import { getAuth, onAuthStateChanged, User } from "firebase/auth";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface UserContextType {
-  user?: firebase.User;
+  user?: User;
 }
 
 export const UserContext = createContext<UserContextType>({
@@ -15,12 +15,13 @@ interface Props {
 }
 
 export default function UserProvider(props: Props): JSX.Element {
-  const [user, setUser] = useState<firebase.User>(undefined);
+  const [user, setUser] = useState<User>(undefined);
+  const auth = getAuth();
 
   useEffect(() => {
     // Create a listener that is triggered every time a Firebase user is signed in and out
     // https://firebase.google.com/docs/reference/js/firebase.auth.Auth#onauthstatechanged
-    const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         console.log("Auth state changed: logged in");
 

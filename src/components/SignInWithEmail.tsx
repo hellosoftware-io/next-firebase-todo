@@ -1,16 +1,14 @@
-import React from "react";
-import firebase from "network/firebase";
 import {
   Box,
   Button,
   Card,
   Container,
   Grid,
-  Link,
-  Typography,
-  TextField,
+  Link, TextField, Typography
 } from "@mui/material";
-import { Formik, Form } from "formik";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { Form, Formik } from "formik";
+import React from "react";
 import * as Yup from "yup";
 
 const ValidationSchema = Yup.object().shape({
@@ -19,12 +17,10 @@ const ValidationSchema = Yup.object().shape({
 });
 
 export default function SignInWithEmail(): JSX.Element {
-  firebase.auth().useDeviceLanguage();
+  const auth = getAuth();
 
   function signup(email: string, password: string) {
-    return firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
+    return createUserWithEmailAndPassword(auth, email, password)
       .then((_userCredential) => {
         console.log("User signed up :)");
         // You can access the user credential here
@@ -37,9 +33,7 @@ export default function SignInWithEmail(): JSX.Element {
   }
 
   function signin(email: string, password: string) {
-    return firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
+    return signInWithEmailAndPassword(auth, email, password)
       .then((_userCredential) => {
         console.log("User signed in :)");
         // You can access the user credential here

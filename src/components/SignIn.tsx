@@ -1,18 +1,16 @@
-import React, { useState } from "react";
-import firebase from "network/firebase";
 import { Box, Button, Card, Container, Link, Typography } from "@mui/material";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import React, { useState } from "react";
 import SignInWithEmail from "./SignInWithEmail";
 
 export default function SignIn(): JSX.Element {
   const [showSigninEmail, setShowSigninEmail] = useState(false);
-  const provider = new firebase.auth.GoogleAuthProvider();
+  const provider = new GoogleAuthProvider();
 
   function signinClicked() {
-    firebase.auth().useDeviceLanguage();
+    const auth = getAuth();
 
-    firebase
-      .auth()
-      .signInWithPopup(provider)
+      signInWithPopup(auth, provider)
       .then(() => {
         console.log("Signed in with popup");
       });

@@ -1,7 +1,4 @@
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
-import "firebase/functions";
+import { FirebaseApp, getApps, initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -12,12 +9,12 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-if (!firebase.apps.length) {
+export let firebaseApp: FirebaseApp
+
+if (!getApps().length) {
   console.log("Started Firebase app");
-  firebase.initializeApp(firebaseConfig);
+  firebaseApp = initializeApp(firebaseConfig);
 
   // firebase.functions().useEmulator("localhost", 5001);
   // firebase.auth().useEmulator("http://localhost:9099/");
 }
-
-export default firebase;
