@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import firebase from "network/firebase";
-import {
-  Box,
-  Button,
-  Card,
-  Container,
-  Link,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Card, Container, Link, Typography } from "@mui/material";
 import SignInWithEmail from "./SignInWithEmail";
 
 export default function SignIn(): JSX.Element {
